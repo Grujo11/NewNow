@@ -1,8 +1,12 @@
-package com.example.NewNow.model;
+package com.example.NewNow.model.dto;
+
+import com.example.NewNow.model.entity.RequestStatus;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-public class AccountRequest {
+@Data
+public class AccountRequestDTO {
     private Long id;
     private String email;
     private String password;
