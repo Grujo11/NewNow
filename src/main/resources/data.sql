@@ -1,2 +1,2 @@
-INSERT INTO user(email)VALUES
+INSERT INTO users(email)VALUES
 ('stefan@gmail.com');

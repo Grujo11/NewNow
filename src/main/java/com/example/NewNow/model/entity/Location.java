@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Table(name = "users")
@@ -26,6 +28,17 @@ public class Location {
     private String address;
     private Double totalRating;
     private String type;
+
+
+    @OneToOne
+    private User user;
+
+    @OneToMany(mappedBy = "location")
+    Set<Event> events = new HashSet<Event>();
+
+    @OneToMany(mappedBy = "location")
+    Set<Review> reviews = new HashSet<Review>();
+
 
     // Relationships
     //private List<Event> events = new ArrayList<>();

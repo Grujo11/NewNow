@@ -24,6 +24,23 @@ public class Review {
     private Integer eventCount;
     private Boolean hidden;
 
+
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Location location;
+
+    @ManyToOne
+    private Event event;
+
+    @OneToOne
+    private Comment comment;
+
+    @OneToOne
+    private Rate rate;
+
     // Relationships
     //private User author;        // made by
     //private Location location;  // belongs to

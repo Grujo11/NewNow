@@ -20,6 +20,17 @@ public class Image {
     private Long id;
     private String path;
 
+
+    @OneToOne
+    private User user;
+
+
+    @OneToOne
+    private Location location;
+
+    @OneToOne
+    private Event event;
+
     // Relationship
     //private Event event; // belongs to
 

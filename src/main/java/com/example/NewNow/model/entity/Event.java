@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -25,6 +27,16 @@ public class Event {
     private LocalDate date;
     private Double price;
     private Boolean recurrent;
+
+
+    @ManyToOne
+    private Location location;
+
+    @OneToOne
+    private Image image;
+
+    @OneToMany(mappedBy = "event")
+    private Set<Review> reviews = new HashSet<Review>();
 
     // Relationships
     // private Location location; // belongs to

@@ -23,6 +23,13 @@ public class Manages {
     private LocalDate startDate;
     private LocalDate endDate;
 
+
+    @OneToOne
+    private Location location;
+
+    @OneToOne
+    private User user;
+
     // Relationships
     //private User manager;     // user who manages
     //private Location location; // managed location

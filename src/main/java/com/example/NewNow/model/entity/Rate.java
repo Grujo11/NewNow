@@ -22,6 +22,7 @@ public class Rate {
     private Integer venue;
     private Integer overallImpression;
 
+
     // Relationship
     //private Review review;
 

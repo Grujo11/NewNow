@@ -22,6 +22,9 @@ public class Comment {
     private String text;
     private LocalDateTime createdAt;
 
+    @ManyToOne
+    private User user;
+
     // Relationships
     //private Review review;            // belongs to
     //private Comment parentComment;    // replies to
