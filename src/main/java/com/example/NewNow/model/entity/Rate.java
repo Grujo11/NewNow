@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "users")
 @Entity
 @Setter
 @Getter
@@ -23,13 +22,5 @@ public class Rate {
     private Integer overallImpression;
 
 
-    // Relationship
-    //private Review review;
-
-
-    // Sharing PK sa Review da bude strogo 1:1
-    /*@OneToOne(optional = false) @MapsId
-    @JoinColumn(name = "review_id", unique = true)
-    Review review;*/
 }
 

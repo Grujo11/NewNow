@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "users")
 @Entity
 @Setter
 @Getter
@@ -31,18 +30,5 @@ public class Image {
     @OneToOne
     private Event event;
 
-    // Relationship
-    //private Event event; // belongs to
-
-
-    // Image → Event : 0..1 : 1  (najviše jedna slika po eventu)
-   /* @OneToOne
-    @JoinColumn(name = "event_id", unique = true)
-    Event event;
-
-    // Image → Location : 0..1 : 1  (najviše jedna slika po lokaciji)
-    @OneToOne
-    @JoinColumn(name = "location_id", unique = true)
-    Location location;*/
 }
 

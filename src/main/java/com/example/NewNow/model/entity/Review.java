@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 
-@Table(name = "users")
 @Entity
 @Setter
 @Getter
@@ -41,24 +40,5 @@ public class Review {
     @OneToOne
     private Rate rate;
 
-    // Relationships
-    //private User author;        // made by
-    //private Location location;  // belongs to
-    //private Rate rate;          // with rating (1-1)
-    //private List<Comment> comments = new ArrayList<>();
-
-    // Review → User (author) : N : 1
-    /*@ManyToOne(optional = false)
-    @JoinColumn(name = "author_id")
-    User author;
-
-    // Review → Event : N : 1  ("for a" Event)
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "event_id")
-    Event event;
-
-    // Review ↔ Rate : 1 : 1 (svaki review ima tačno jedan rating)
-    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
-    Rate rate;*/
 }
 

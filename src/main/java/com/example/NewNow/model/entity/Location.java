@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Table(name = "users")
 @Entity
 @Setter
 @Getter
@@ -39,22 +38,5 @@ public class Location {
     @OneToMany(mappedBy = "location")
     Set<Review> reviews = new HashSet<Review>();
 
-
-    // Relationships
-    //private List<Event> events = new ArrayList<>();
-    //private List<Review> reviews = new ArrayList<>();
-
-
-    // Location ← Event : 1 : N
-   /* @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Event> events = new ArrayList<>();
-
-    // Location ↔ Manages : 1 : N (mnogo zapisa ko-kada upravlja)
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Manages> managers = new ArrayList<>();
-
-    // Location ↔ Image : 1 : 1 (0..1 slika po lokaciji; owning side je Image)
-    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-    Image image;*/
 }
 
