@@ -21,8 +21,32 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) {
-        return null;
+        if (reviewDTO == null) {
+            throw new IllegalArgumentException("ReviewDTO ne sme biti null.");
+        }
+
+        Review review = new Review();
+
+        // eventCount – ako nema u DTO, krećemo od 0
+        if (reviewDTO.getEventCount() != null) {
+            review.setEventCount(reviewDTO.getEventCount());
+        } else {
+            review.setEventCount(0);
+        }
+
+        // hidden – podrazumevano false
+        if (reviewDTO.getHidden() != null) {
+            review.setHidden(reviewDTO.getHidden());
+        } else {
+            review.setHidden(false);
+        }
+
+        // createdAt najčešće ide iz baze / @CreationTimestamp, pa ga ne diramo
+
+        Review saved = reviewRepository.save(review);
+        return convertReviewToDTO(saved);
     }
+
 
     @Override
     public Set<ReviewDTO> getAllReviews() {
@@ -46,13 +70,43 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Boolean deleteReviewById(Long id) {
-        return null;
+        if (id == null) {
+            return false;
+        }
+
+        if (!reviewRepository.existsById(id)) {
+            return false;
+        }
+
+        reviewRepository.deleteById(id);
+        return true;
     }
+
 
     @Override
     public ReviewDTO updateReviewById(Long id, ReviewDTO reviewDTO) {
-        return null;
+        if (id == null || reviewDTO == null) {
+            return null;
+        }
+
+        Optional<Review> optionalReview = reviewRepository.findById(id);
+        if (optionalReview.isEmpty()) {
+            return null;
+        }
+
+        Review review = optionalReview.get();
+
+        if (reviewDTO.getEventCount() != null) {
+            review.setEventCount(reviewDTO.getEventCount());
+        }
+        if (reviewDTO.getHidden() != null) {
+            review.setHidden(reviewDTO.getHidden());
+        }
+
+        Review saved = reviewRepository.save(review);
+        return convertReviewToDTO(saved);
     }
+
 
     public ReviewDTO convertReviewToDTO(Review review) {
         ReviewDTO reviewDTO = new ReviewDTO();

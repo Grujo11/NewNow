@@ -19,8 +19,37 @@ public class EventServiceImpl implements EventService {
     }
     @Override
     public EventDTO createEvent(EventDTO eventDTO) {
-        return null;
+        if (eventDTO == null) {
+            throw new IllegalArgumentException("EventDTO ne sme biti null.");
+        }
+
+        if (eventDTO.getName() == null || eventDTO.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Naziv događaja je obavezan.");
+        }
+        if (eventDTO.getAddress() == null || eventDTO.getAddress().trim().isEmpty()) {
+            throw new IllegalArgumentException("Adresa događaja je obavezna.");
+        }
+        if (eventDTO.getType() == null) {
+            throw new IllegalArgumentException("Tip događaja je obavezan.");
+        }
+        if (eventDTO.getDate() == null) {
+            throw new IllegalArgumentException("Datum događaja je obavezan.");
+        }
+
+        Event event = new Event();
+        event.setName(eventDTO.getName());
+        event.setAddress(eventDTO.getAddress());
+        event.setType(eventDTO.getType());
+        event.setDate(eventDTO.getDate());
+        event.setPrice(eventDTO.getPrice()); // može biti null ako je besplatan
+        event.setRecurrent(
+                eventDTO.getRecurrent() != null ? eventDTO.getRecurrent() : false
+        );
+
+        Event saved = eventRepository.save(event);
+        return convertEventToDTO(saved);
     }
+
     @Override
     public Set<EventDTO> getAllEvents() {
         Set<EventDTO> eventDTOSet = new HashSet<>();
@@ -41,12 +70,54 @@ public class EventServiceImpl implements EventService {
     }
     @Override
     public Boolean deleteEventById(Long id) {
-        return null;
+        if (id == null) {
+            return false;
+        }
+
+        if (!eventRepository.existsById(id)) {
+            return false;
+        }
+
+        eventRepository.deleteById(id);
+        return true;
     }
+
     @Override
     public EventDTO updateEventById(Long id, EventDTO eventDTO) {
-        return null;
+        if (id == null || eventDTO == null) {
+            return null;
+        }
+
+        Optional<Event> optionalEvent = eventRepository.findById(id);
+        if (optionalEvent.isEmpty()) {
+            return null;
+        }
+
+        Event event = optionalEvent.get();
+
+        if (eventDTO.getName() != null) {
+            event.setName(eventDTO.getName());
+        }
+        if (eventDTO.getAddress() != null) {
+            event.setAddress(eventDTO.getAddress());
+        }
+        if (eventDTO.getType() != null) {
+            event.setType(eventDTO.getType());
+        }
+        if (eventDTO.getDate() != null) {
+            event.setDate(eventDTO.getDate());
+        }
+        if (eventDTO.getPrice() != null) {
+            event.setPrice(eventDTO.getPrice());
+        }
+        if (eventDTO.getRecurrent() != null) {
+            event.setRecurrent(eventDTO.getRecurrent());
+        }
+
+        Event saved = eventRepository.save(event);
+        return convertEventToDTO(saved);
     }
+
 
     public EventDTO convertEventToDTO(Event event) {
         EventDTO eventDTO = new EventDTO();
