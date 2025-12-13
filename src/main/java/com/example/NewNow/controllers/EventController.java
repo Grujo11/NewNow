@@ -1,7 +1,9 @@
 package com.example.NewNow.controllers;
 
 import com.example.NewNow.model.dto.EventDTO;
+import com.example.NewNow.model.dto.location.EventCreateDTO;
 import com.example.NewNow.services.EventService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +46,7 @@ public class EventController {
         return new ResponseEntity<>(eventDTO, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {
+    public ResponseEntity<EventDTO> createEvent(@Valid @RequestBody EventCreateDTO eventDTO) {
         EventDTO created = eventService.createEvent(eventDTO);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }

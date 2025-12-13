@@ -1,11 +1,12 @@
 package com.example.NewNow.services;
 
-import com.example.NewNow.model.dto.LocationDTO;
+import com.example.NewNow.model.dto.location.LocationCreateDTO;
+import com.example.NewNow.model.dto.location.LocationDTO;
 
 import java.util.Set;
 
 public interface LocationService {
-    LocationDTO createLocation(LocationDTO locationDTO);
+    LocationDTO createLocation(LocationCreateDTO locationDTO);
     Set<LocationDTO> getAllLocations();
     LocationDTO getLocationById(Long id);
     Boolean deleteLocationById(Long id);

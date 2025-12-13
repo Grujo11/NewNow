@@ -1,6 +1,7 @@
 package com.example.NewNow.services.implementations;
 
 import com.example.NewNow.model.dto.EventDTO;
+import com.example.NewNow.model.dto.location.EventCreateDTO;
 import com.example.NewNow.model.entity.Event;
 import com.example.NewNow.repositories.EventRepository;
 import com.example.NewNow.services.EventService;
@@ -18,23 +19,8 @@ public class EventServiceImpl implements EventService {
         this.eventRepository = eventRepository;
     }
     @Override
-    public EventDTO createEvent(EventDTO eventDTO) {
-        if (eventDTO == null) {
-            throw new IllegalArgumentException("EventDTO ne sme biti null.");
-        }
+    public EventDTO createEvent(EventCreateDTO eventDTO) {
 
-        if (eventDTO.getName() == null || eventDTO.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Naziv događaja je obavezan.");
-        }
-        if (eventDTO.getAddress() == null || eventDTO.getAddress().trim().isEmpty()) {
-            throw new IllegalArgumentException("Adresa događaja je obavezna.");
-        }
-        if (eventDTO.getType() == null) {
-            throw new IllegalArgumentException("Tip događaja je obavezan.");
-        }
-        if (eventDTO.getDate() == null) {
-            throw new IllegalArgumentException("Datum događaja je obavezan.");
-        }
 
         Event event = new Event();
         event.setName(eventDTO.getName());

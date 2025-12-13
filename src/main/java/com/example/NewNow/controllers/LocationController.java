@@ -1,8 +1,10 @@
 package com.example.NewNow.controllers;
 
 
-import com.example.NewNow.model.dto.LocationDTO;
+import com.example.NewNow.model.dto.location.LocationCreateDTO;
+import com.example.NewNow.model.dto.location.LocationDTO;
 import com.example.NewNow.services.LocationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +47,7 @@ public class LocationController {
 
     }
     @PostMapping
-    public ResponseEntity<LocationDTO> createLocation(@RequestBody LocationDTO locationDTO) {
+    public ResponseEntity<LocationDTO> createLocation(@Valid @RequestBody LocationCreateDTO locationDTO) {
         LocationDTO created = locationService.createLocation(locationDTO);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }

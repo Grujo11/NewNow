@@ -1,11 +1,13 @@
 package com.example.NewNow.services.implementations;
 
-import com.example.NewNow.model.dto.LocationDTO;
+import com.example.NewNow.model.dto.location.LocationCreateDTO;
+import com.example.NewNow.model.dto.location.LocationDTO;
 import com.example.NewNow.model.entity.Location;
 import com.example.NewNow.repositories.LocationRepository;
 import com.example.NewNow.services.LocationService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -18,20 +20,7 @@ public class LocationServiceImpl implements LocationService {
         this.locationRepository = locationRepository;
     }
     @Override
-    public LocationDTO createLocation(LocationDTO locationDTO) {
-        if (locationDTO == null) {
-            throw new IllegalArgumentException("LocationDTO ne sme biti null.");
-        }
-
-        if (locationDTO.getName() == null || locationDTO.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Naziv mesta je obavezan.");
-        }
-        if (locationDTO.getAddress() == null || locationDTO.getAddress().trim().isEmpty()) {
-            throw new IllegalArgumentException("Adresa mesta je obavezna.");
-        }
-        if (locationDTO.getType() == null) {
-            throw new IllegalArgumentException("Tip mesta je obavezan.");
-        }
+    public LocationDTO createLocation(LocationCreateDTO locationDTO) {
 
         Location location = new Location();
         location.setName(locationDTO.getName());
@@ -39,10 +28,8 @@ public class LocationServiceImpl implements LocationService {
         location.setAddress(locationDTO.getAddress());
         location.setType(locationDTO.getType());
 
-        // totalRating obično kreće od 0
-        location.setTotalRating(
-                locationDTO.getTotalRating() != null ? locationDTO.getTotalRating() : 0.0
-        );
+        location.setTotalRating(0.0);
+        location.setCreatedAt(LocalDate.now());
 
         Location saved = locationRepository.save(location);
         return convertLocationToDTO(saved);

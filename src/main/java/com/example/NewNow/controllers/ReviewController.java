@@ -1,7 +1,9 @@
 package com.example.NewNow.controllers;
 
 import com.example.NewNow.model.dto.ReviewDTO;
+import com.example.NewNow.model.dto.location.ReviewCreateDTO;
 import com.example.NewNow.services.ReviewService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +46,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviewDTO, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<ReviewDTO> createReview(@Valid @RequestBody ReviewCreateDTO reviewDTO) {
         ReviewDTO created = reviewService.createReview(reviewDTO);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }

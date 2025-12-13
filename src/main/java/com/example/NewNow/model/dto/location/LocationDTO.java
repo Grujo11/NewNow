@@ -1,4 +1,4 @@
-package com.example.NewNow.model.dto;
+package com.example.NewNow.model.dto.location;
 
 import lombok.Data;
 

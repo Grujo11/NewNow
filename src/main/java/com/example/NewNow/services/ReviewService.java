@@ -1,11 +1,12 @@
 package com.example.NewNow.services;
 
 import com.example.NewNow.model.dto.ReviewDTO;
+import com.example.NewNow.model.dto.location.ReviewCreateDTO;
 
 import java.util.Set;
 
 public interface ReviewService {
-    ReviewDTO createReview(ReviewDTO reviewDTO);
+    ReviewDTO createReview(ReviewCreateDTO reviewDTO);
     Set<ReviewDTO> getAllReviews();
     ReviewDTO getReviewById(Long id);
     Boolean deleteReviewById(Long id);

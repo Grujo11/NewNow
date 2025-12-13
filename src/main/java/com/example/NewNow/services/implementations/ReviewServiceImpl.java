@@ -1,6 +1,7 @@
 package com.example.NewNow.services.implementations;
 
 import com.example.NewNow.model.dto.ReviewDTO;
+import com.example.NewNow.model.dto.location.ReviewCreateDTO;
 import com.example.NewNow.model.entity.Review;
 import com.example.NewNow.repositories.ReviewRepository;
 import com.example.NewNow.services.ReviewService;
@@ -20,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDTO createReview(ReviewDTO reviewDTO) {
+    public ReviewDTO createReview(ReviewCreateDTO reviewDTO) {
         if (reviewDTO == null) {
             throw new IllegalArgumentException("ReviewDTO ne sme biti null.");
         }
